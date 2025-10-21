@@ -1,0 +1,41 @@
+@startuml
+!define RECTANGLE class
+
+package "Web Application" {
+    RECTANGLE Frontend {
+        + React Components
+        + State Management
+        + API Client
+    }
+    
+    RECTANGLE Backend {
+        + REST API
+        + Business Logic
+        + Authentication
+    }
+    
+    RECTANGLE Database {
+        + PostgreSQL
+        + Redis Cache
+    }
+}
+
+Frontend --> Backend : HTTP/REST
+Backend --> Database : SQL Queries
+Backend --> Database : Cache Operations
+
+note right of Frontend
+    Modern SPA built with React
+    Handles user interactions
+end note
+
+note right of Backend
+    Node.js/Express API
+    Handles business logic
+end note
+
+note right of Database
+    Persistent storage
+    and caching layer
+end note
+@enduml

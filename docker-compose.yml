@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  puml-generator:
+    build: .
+    image: puml-generator:latest
+    container_name: puml-generator
+    ports:
+      - "8080:8080"
+    volumes:
+      # Mount your PlantUML files directory
+      - ./examples:/input
+      # Mount output directory
+      - ./output:/output
+    environment:
+      - INPUT_DIR=/input
+      - OUTPUT_DIR=/output
+      - PORT=8080
+      # Uncomment and configure for Azure DevOps publishing
+      # - AZURE_DEVOPS_ORG=your-organization
+      # - AZURE_DEVOPS_PROJECT=your-project
+      # - AZURE_DEVOPS_WIKI_ID=your-wiki-id
+      # - AZURE_DEVOPS_PAT=your-personal-access-token
+      # - AZURE_DEVOPS_WIKI_PATH=/PlantUML
+    command: serve
+    # Alternative commands:
+    # command: process                 # Just process files
+    # command: publish                # Process and publish to Azure DevOps
+    # command: process-and-publish    # Process, publish, and serve

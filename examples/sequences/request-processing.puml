@@ -1,0 +1,20 @@
+@startuml
+start
+
+:User initiates request;
+
+if (Is authenticated?) then (yes)
+    :Process request;
+    if (Has permission?) then (yes)
+        :Execute action;
+        :Return success;
+    else (no)
+        :Return 403 Forbidden;
+    endif
+else (no)
+    :Return 401 Unauthorized;
+endif
+
+:Log request;
+stop
+@enduml

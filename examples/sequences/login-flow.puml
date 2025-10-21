@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "Web Browser" as Browser
+participant "API Gateway" as Gateway
+participant "Auth Service" as Auth
+participant "Database" as DB
+
+User -> Browser: Enter credentials
+Browser -> Gateway: POST /login
+Gateway -> Auth: Validate credentials
+Auth -> DB: Query user
+DB --> Auth: User data
+Auth --> Gateway: JWT Token
+Gateway --> Browser: Token + User info
+Browser --> User: Show dashboard
+
+note right of Auth
+    Authentication service
+    validates credentials
+    and generates tokens
+end note
+@enduml
